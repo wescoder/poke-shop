@@ -1,0 +1,29 @@
+{
+  "name": "poke-shop",
+  "version": "0.0.1",
+  "description": "Web dev test for Publicista",
+  "main": "index.js",
+  "repository": "git@github.com:wescoder/poke-shop.git",
+  "author": "Wésley Queiroz <wesley.coder@gmail.com> (https://github.com/wescoder)",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "@koa/cors": "^2.2.1",
+    "graphql": "^0.13.1",
+    "graphql-relay": "^0.5.4",
+    "graphql-sequelize": "^7.0.2",
+    "koa": "^2.5.0",
+    "koa-graphql-next": "^1.0.9",
+    "sequelize": "^4.35.0",
+    "sqlite3": "^3.1.13"
+  },
+  "devDependencies": {
+    "babel-runtime": "^6.26.0",
+    "npm-run-all": "^4.1.2",
+    "npx": "^9.7.1",
+    "reify": "^0.14.2"
+  }
+}

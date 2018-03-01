@@ -1,33 +1,43 @@
-import Koa from 'koa'
-import graphqlHTTP from 'koa-graphql-next'
-import fs from 'fs'
+import http from 'http'
 import https from 'https'
+
+import Koa from 'koa'
+import bodyparser from 'koa-bodyparser'
 import cors from '@koa/cors'
-import { resolve } from 'path'
-import { schema } from '../schema'
+import mount from 'koa-mount'
+import cert from 'openssl-self-signed-certificate'
+import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa'
 
 import db from '../db'
-
-const APP_PORT = process.env.PORT || 3000
+import { schema } from '../schema'
+import env from '../env'
 
 const app = new Koa()
 
+app.use(bodyparser())
+
 app.use(cors())
 
-app.use(graphqlHTTP({
-  schema,
-  graphiql: true
-}))
+app.use(mount('/graphql', graphqlKoa({ schema })))
+app.use(mount('/graphiql', graphiqlKoa({ endpointURL: '/graphql' })))
+
+let server
+
+if (!env.prod) {
+  server = https.createServer({
+      key: cert.key,
+      cert: cert.cert,
+      passphrase: cert.passphrase
+    }, app.callback())
+} else {
+  server = http.createServer(app.callback())
+}
 
 db.sync()
   .then(() =>
-    https.createServer({
-      key: fs.readFileSync(resolve(__dirname, './server.key')),
-      cert: fs.readFileSync(resolve(__dirname, './server.cert'))
-    }, app.callback())
-      .listen(APP_PORT, () =>
-        console.log(`App running on port ${APP_PORT} https://0.0.0.0:${APP_PORT}/graphql`)
-      )
+    server.listen(env.appPort, () =>
+      console.log(`App running on port ${env.appPort} ${env.appUrl}/graphiql`)
+    )
   )
   .catch(err => console.error('DB connection Failed!', err))
 

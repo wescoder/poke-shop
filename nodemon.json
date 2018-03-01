@@ -1,0 +1,10 @@
+{
+  "verbose": false,
+  "watch": [
+    "db/",
+    "schema/",
+    "server/",
+    "index.js"
+  ],
+  "ext": "js json db"
+}

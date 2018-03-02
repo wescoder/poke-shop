@@ -58,3 +58,6 @@ typings/
 .env
 
 .reify-cache
+
+# Local database
+db/poke-shop-*.db

@@ -30,34 +30,16 @@ export const pokemonType = new GraphQLObjectType({
   fields: Object.assign(attributeFields(Pokemon), {})
 })
 
-export const pokemonInput = {
-  add: new GraphQLInputObjectType({
-    name: 'addPokemonInput',
-    fields: {
-      name: { type: GraphQLString },
-      price: { type: GraphQLFloat },
-      stock: { type: GraphQLInt }
-    }
-  }),
-  buy: new GraphQLInputObjectType({
-    name: 'buyPokemonInput',
-    fields: {
-      name: { type: GraphQLString }
-    }
-  }),
-  creditCard: new GraphQLInputObjectType({
-    name: 'creditCardInput',
-    fields: {
-      card_number: { type: GraphQLString },
-      card_expiration_date: { type: GraphQLString },
-      card_holder_name: { type: GraphQLString },
-      card_cvv: { type: GraphQLString }
-    }
+export const addPokemon = async (_, { pokemon: { name, price, stock} }) => {
+  const hasPokemon = Pokemon.count({ where: { name: name.toLowerCase() } })
+  if (hasPokemon) {
+    throw new GQLError(`A pokemon with the name "${name}" already exists`)
+  }
+  const pokemon = await Pokemon.create({
+    name: name.toLowerCase(),
+    price,
+    stock
   })
-}
-
-export const addPokemon = async (_, { pokemon: pokemonData }) => {
-  const pokemon = await Pokemon.create(pokemonData)
   return pokemon.get()
 }
 
@@ -123,7 +105,14 @@ export const pokemonMutations = {
     type: pokemonType,
     description: 'Add pokémon',
     args: {
-      pokemon: { type: pokemonInput.add }
+      pokemon: { type: new GraphQLInputObjectType({
+        name: 'addPokemonInput',
+        fields: {
+          name: { type: GraphQLString },
+          price: { type: GraphQLFloat },
+          stock: { type: GraphQLInt }
+        }
+      }) }
     },
     resolve: addPokemon
   },
@@ -142,7 +131,17 @@ export const pokemonMutations = {
     args: {
       pokemonName: { type: GraphQLString },
       quantity: { type: GraphQLInt },
-      creditCard: { type: pokemonInput.creditCard }
+      creditCard: {
+        type: new GraphQLInputObjectType({
+          name: 'creditCardInput',
+          fields: {
+            card_number: { type: GraphQLString },
+            card_expiration_date: { type: GraphQLString },
+            card_holder_name: { type: GraphQLString },
+            card_cvv: { type: GraphQLString }
+          }
+        })
+      }
     },
     resolve: buyPokemon
   }

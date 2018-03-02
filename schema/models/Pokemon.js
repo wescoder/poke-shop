@@ -31,7 +31,7 @@ export const pokemonType = new GraphQLObjectType({
 })
 
 export const addPokemon = async (_, { pokemon: { name, price, stock} }) => {
-  const hasPokemon = Pokemon.count({ where: { name: name.toLowerCase() } })
+  const hasPokemon = await Pokemon.count({ where: { name: name.toLowerCase() } })
   if (hasPokemon) {
     throw new GQLError(`A pokemon with the name "${name}" already exists`)
   }

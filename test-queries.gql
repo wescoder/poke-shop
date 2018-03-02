@@ -1,0 +1,65 @@
+query pokemons {
+  pokemons {
+    id
+    name
+    price
+    stock
+    createdAt
+    updatedAt
+  }
+}
+
+mutation addPokemon ($bulbasaur: addPokemonInput) {
+  addPokemon(pokemon: $bulbasaur) {
+    id
+    name
+    price
+    stock
+    createdAt
+    updatedAt
+  }
+}
+
+mutation restockPokemon ($bulba: String) {
+  restockPokemon(pokemonName: $bulba, quantity: 10) {
+    id
+    name
+    price
+    stock
+    createdAt
+    updatedAt
+  }
+}
+
+mutation buyPokemon ($bulba: String, $creditCard: creditCardInput) {
+  buyPokemon(pokemonName: $bulba, quantity: 1, creditCard: $creditCard) {
+    id
+    name
+    price
+    stock
+    createdAt
+    updatedAt
+  }
+}
+
+mutation buyWrongPokemon ($charmander: String, $creditCard: creditCardInput) {
+  buyPokemon(pokemonName: $charmander, quantity: 1, creditCard: $creditCard) {
+    id
+    name
+    price
+    stock
+    createdAt
+    updatedAt
+  }
+}
+
+mutation invalidPayment ($bulba: String, $wrongCreditCard: creditCardInput) {
+  buyPokemon(pokemonName: $bulba, quantity: 1, creditCard: $wrongCreditCard) {
+    id
+    name
+    price
+    stock
+    createdAt
+    updatedAt
+  }
+}

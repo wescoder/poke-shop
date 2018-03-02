@@ -1,0 +1,6 @@
+{
+  "env": {
+    "PAYMENT_API": "https://api.pagar.me/1/transactions",
+    "PAYMENT_API_KEY": "@pagarme-key"
+  }
+}

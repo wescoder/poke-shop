@@ -1,6 +1,5 @@
-import Sequelize from 'sequelize'
-import { query, mutation } from './models'
 import db from '../db'
+import { query, mutation } from './models'
 import { GraphQLSchema } from 'graphql'
 
 export const schema = new GraphQLSchema({

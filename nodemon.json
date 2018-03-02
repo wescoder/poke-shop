@@ -4,7 +4,9 @@
     "db/",
     "schema/",
     "server/",
+    "nodemon.json",
+    "env.js",
     "index.js"
   ],
-  "ext": "js json db"
+  "ext": "js json"
 }

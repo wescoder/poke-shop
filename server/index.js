@@ -18,7 +18,15 @@ app.use(bodyparser())
 
 app.use(cors())
 
-app.use(mount('/graphql', graphqlKoa({ schema })))
+app.use(mount('/graphql', graphqlKoa({
+  schema,
+  formatError: ({ message, originalError, locations, path }) => ({
+    state: originalError && originalError.state,
+    locations,
+    message,
+    path
+  })
+})))
 app.use(mount('/graphiql', graphiqlKoa({ endpointURL: '/graphql' })))
 
 let server

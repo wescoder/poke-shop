@@ -26,13 +26,30 @@ export const pokemonType = new GraphQLObjectType({
   fields: Object.assign(attributeFields(Pokemon), {})
 })
 
-export const addPokemonInput = new GraphQLInputObjectType({
-  name: 'addPokemonInput',
-  fields: {
-    name: { type: GraphQLString },
-    price: { type: GraphQLFloat },
-    stock: { type: GraphQLInt }
-  }
-})
+export const pokemonInput = {
+  add: new GraphQLInputObjectType({
+    name: 'addPokemonInput',
+    fields: {
+      name: { type: GraphQLString },
+      price: { type: GraphQLFloat },
+      stock: { type: GraphQLInt }
+    }
+  }),
+  buy: new GraphQLInputObjectType({
+    name: 'buyPokemonInput',
+    fields: {
+      name: { type: GraphQLString }
+    }
+  }),
+  creditCard: new GraphQLInputObjectType({
+    name: 'creditCardInput',
+    fields: {
+      card_number: { type: GraphQLString },
+      card_expiration_date: { type: GraphQLString },
+      card_holder_name: { type: GraphQLString },
+      card_cvv: { type: GraphQLString }
+    }
+  })
+}
 
 export default Pokemon

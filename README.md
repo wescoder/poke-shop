@@ -3,7 +3,7 @@ Code test for Publicista.
 
 > This is a code for testing my development skills offered by [Publicista](https://trampos.co/publicista-servicos-corporativos-ltda)
 
-## Live example
+## Testing
 
 > A live example can be found at [poke-shop.now.sh/graphiql](https://poke-shop.now.sh/graphiql)
 
@@ -13,7 +13,12 @@ Code test for Publicista.
 
 > This Live demo is read only for now and no database write operations will work
 
-> You can still download and run the application on your machine
+> You can still download and run the application on your machine, but do not forget to create a `.env` file in the root of the project like so:
+
+```sh
+PAYMENT_API='https://api.pagar.me/1/transactions'
+PAYMENT_API_KEY='ak_test_GPmn2J6W4x3neK6kPiqlkNjCG9QwnS'
+```
 
 > For the buy operations you will need to provide credit card information
 

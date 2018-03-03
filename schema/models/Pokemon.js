@@ -30,10 +30,10 @@ export const pokemonType = new GraphQLObjectType({
   fields: Object.assign(attributeFields(Pokemon), {})
 })
 
-export const addPokemon = async (_, { pokemon: { name, price, stock} }) => {
+export const addPokemon = async (_, { pokemon: { name, price, stock } }) => {
   const hasPokemon = await Pokemon.count({ where: { name: name.toLowerCase() } })
   if (hasPokemon) {
-    throw new GQLError(`A pokemon with the name "${name}" already exists`)
+    throw new GQLError(`The pokemon with the name "${name}" already exists, try restocking`)
   }
   const pokemon = await Pokemon.create({
     name: name.toLowerCase(),

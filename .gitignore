@@ -60,4 +60,5 @@ typings/
 .reify-cache
 
 # Local database
+# Ignoring the db stops the deploy to now.sh
 db/poke-shop-*.db

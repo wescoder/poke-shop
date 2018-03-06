@@ -1,10 +1,11 @@
-import db from '../db'
-import { query, mutation } from './models'
-import { GraphQLSchema } from 'graphql'
+import { makeExecutableSchema } from 'graphql-tools'
 
-export const schema = new GraphQLSchema({
-  query,
-  mutation
+import typeDefs from './root.gql'
+import resolvers from './resolvers'
+
+export const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers
 })
 
 export default schema

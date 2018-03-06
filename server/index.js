@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import http from 'http'
 import https from 'https'
 
@@ -9,14 +10,13 @@ import cert from 'openssl-self-signed-certificate'
 import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa'
 
 import db from '../db'
-import { schema } from '../schema'
 import env from '../env'
+import schema from '../schema'
 
 const app = new Koa()
 
-app.use(bodyparser())
-
 app.use(cors())
+app.use(bodyparser())
 
 app.use(mount('/graphql', graphqlKoa({
   schema,
@@ -41,8 +41,7 @@ if (!env.prod) {
   server = http.createServer(app.callback())
 }
 
-db.sync()
-  .then(() =>
+db.then(() =>
     server.listen(env.appPort, () =>
       console.log(`App running on port ${env.appPort} ${env.appUrl}/graphiql`)
     )

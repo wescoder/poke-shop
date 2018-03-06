@@ -1,6 +1,10 @@
 {
   "env": {
     "PAYMENT_API": "https://api.pagar.me/1/transactions",
-    "PAYMENT_API_KEY": "@pagarme-key"
+    "PAYMENT_API_KEY": "@pagarme-key",
+    "MLAB_USER" : "@mlab-user",
+    "MLAB_PASSWORD" : "@mlab-password",
+    "MLAB_ENDPOINT" : "@mlab-endpoint",
+    "MLAB_DATABASE" : "@mlab-pokeshop"
   }
 }

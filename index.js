@@ -1,3 +1,5 @@
-require('reify')
-require('dotenv').config()
+require('babel-register')({
+  cache: false
+})
+require('babel-polyfill')
 require('./server')

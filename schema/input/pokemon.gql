@@ -1,0 +1,5 @@
+input PokemonData {
+  name: String!
+  price: Float!
+  stock: Int!
+}

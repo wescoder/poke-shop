@@ -1,0 +1,14 @@
+#import "./scalars/scalars.gql"
+#import "./input/creditCard.gql"
+#import "./input/pokemon.gql"
+#import "./pokemon/pokemon.gql"
+
+type Query {
+  pokemons: [Pokemon!]!
+}
+
+type Mutation {
+  addPokemon(pokemonData: PokemonData): Pokemon
+  restockPokemon(pokemonName: String, quantity: Int): Pokemon
+  buyPokemon(pokemonName: String, quantity: Int, creditCard: CreditCardData): Pokemon
+}

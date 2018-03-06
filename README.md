@@ -11,13 +11,15 @@ Code test for Publicista.
 
 > You can try the [test queries](./test-queries.gql) and see how the api works
 
-> This Live demo is read only for now and no database write operations will work
-
 > You can still download and run the application on your machine, but do not forget to create a `.env` file in the root of the project like so:
 
 ```sh
 PAYMENT_API='https://api.pagar.me/1/transactions'
-PAYMENT_API_KEY='ak_test_GPmn2J6W4x3neK6kPiqlkNjCG9QwnS'
+PAYMENT_API_KEY='YOUR_PAGARME_API_KEY'
+MLAB_USER='user'
+MLAB_PASSWORD='password'
+MLAB_ENDPOINT='ENDPOINT.mlab.com:PORT'
+MLAB_DATABASE='DATABASE_NAME'
 ```
 
 > For the buy operations you will need to provide credit card information
@@ -30,10 +32,10 @@ Here are some fake data to input on the "Query variables":
 
 ```json
 {
-  "bulbasaur": {
-    "name": "bulbasaur",
-    "price": 120.5,
-    "stock": 20
+  "pokemon": {
+    "name": "blastoise",
+    "price": 100000,
+    "stock": 10
   },
   "bulba": "bulbasaur",
   "charmander": "charmander",
@@ -60,6 +62,7 @@ Here are some fake data to input on the "Query variables":
   - This allow for a better control and flexibility on the client side
   - For more opinions on the matter you can look [here](https://dev-blog.apollodata.com/graphql-vs-rest-5d425123e34b) or [here](https://dev-blog.apollodata.com/why-graphql-is-the-future-3bec28193807)
 - [x] Separation of conserns and structuring the application
+  - [Mongorito](mongorito.com) on top of MongoDB allows to put all models operations in their corresponding models
   - Relying on environment variables allows for development flexibility and server instantiation scalability, and also more security as no sensitive data needs to be put on the code base
   - Separating different parts of the application in different files and in a clear folder structure allows better maintainability and application grow
   - Utilizing [nodemon](https://nodemon.io/) allows the development to be more fluid

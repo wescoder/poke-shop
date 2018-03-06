@@ -1,0 +1,6 @@
+input CreditCardData {
+  card_number: String
+  card_expiration_date: String
+  card_holder_name: String
+  card_cvv: String
+}

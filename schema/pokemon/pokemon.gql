@@ -1,0 +1,9 @@
+# A Pokémon
+type Pokemon {
+  _id: ID!
+  name: String!
+  price: Float!
+  stock: Int!
+  created_at: DateTime
+  updated_at: DateTime
+}

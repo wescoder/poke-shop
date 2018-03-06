@@ -8,5 +8,5 @@
     "env.js",
     "index.js"
   ],
-  "ext": "js json"
+  "ext": "js json gql"
 }

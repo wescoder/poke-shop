@@ -1,6 +1,6 @@
 import { post } from 'axios'
 
-import env from '../../env'
+import { PAYMENT_API, PAYMENT_API_KEY } from '../../env'
 import GQLError from '../GQLError'
 import { Pokemon } from '../../db/models'
 
@@ -46,8 +46,8 @@ export const buyPokemon = async (_, { pokemonName, quantity = 0, creditCard }) =
     throw new GQLError(`Not enought ${pokemon.get('name')} in stock: ${pokemon.get('stock')}`)
   }
 
-  const response = await post(env.paymentEndpoint, Object.assign({
-    api_key: env.paymentAPIKey,
+  const response = await post(PAYMENT_API, Object.assign({
+    api_key: PAYMENT_API_KEY,
     amount: pokemon.get('price') * quantity * 100
   }, creditCard))
     .catch((e) => {

@@ -1,11 +1,62 @@
-export const env = {
-  prod: process.env.NODE_ENV === 'production',
+import { config } from 'dotenv'
+import { resolve } from 'path'
+
+const { NODE_ENV } = process.env
+const envPath = resolve(__dirname, `.env${NODE_ENV !== 'production' ? `.${NODE_ENV}` : ''}`)
+
+config({
+  path: envPath
+})
+
+const {
+  PORT,
+  PAYMENT_API,
+  PAYMENT_API_KEY,
+  MLAB_USER,
+  MLAB_PASSWORD,
+  MLAB_ENDPOINT,
+  MLAB_DATABASE
+} = process.env
+
+const env = {
+  NODE_ENV,
+  MLAB_USER,
+  MLAB_PASSWORD,
+  MLAB_ENDPOINT,
+  MLAB_DATABASE,
+  PAYMENT_API,
+  PAYMENT_API_KEY
 }
 
-env.domain = `${env.prod ? 'poke-shop.now.sh': 'localhost'}`
-env.appPort = process.env.PORT || (env.prod ? 80 : 3000)
-env.appUrl = `https://${env.domain}${env.appPort !== 80 ? `:${env.appPort}` : ''}`
-env.paymentEndpoint = process.env.PAYMENT_API
-env.paymentAPIKey = process.env.PAYMENT_API_KEY
+const IS_PROD = env.IS_PROD = NODE_ENV === 'production'
+const DOMAIN = env.DOMAIN = `${IS_PROD ? 'poke-shop.now.sh': 'localhost'}`
+const APP_PORT = env.APP_PORT = PORT || (IS_PROD ? 80 : 3000)
+const APP_URL = env.APP_URL = `https://${DOMAIN}${APP_PORT !== 80 ? `:${APP_PORT}` : ''}`
 
-export default env
+export {
+  IS_PROD,
+  NODE_ENV,
+  MLAB_USER,
+  MLAB_PASSWORD,
+  MLAB_ENDPOINT,
+  MLAB_DATABASE,
+  PAYMENT_API,
+  PAYMENT_API_KEY,
+  DOMAIN,
+  APP_PORT,
+  APP_URL
+}
+
+export default {
+  IS_PROD,
+  NODE_ENV,
+  MLAB_USER,
+  MLAB_PASSWORD,
+  MLAB_ENDPOINT,
+  MLAB_DATABASE,
+  PAYMENT_API,
+  PAYMENT_API_KEY,
+  DOMAIN,
+  APP_PORT,
+  APP_URL
+}

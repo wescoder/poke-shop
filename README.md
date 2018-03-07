@@ -1,7 +1,7 @@
 # poke-shop
 Code test for Publicista.
 
-> This is a code for testing my development skills offered by [Publicista](https://trampos.co/publicista-servicos-corporativos-ltda)
+> This is a project for testing my development skills
 
 ## Testing
 

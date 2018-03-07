@@ -1,11 +1,7 @@
 {
   "presets": [
-    ["env", {
-      "targets": {
-        "node": "current"
-      }
-    }],
-    "stage-0"
+    ["@babel/preset-env", { "targets": { "node": "current" } }],
+    "@babel/preset-stage-0"
   ],
   "plugins": [
     "inline-import-graphql-ast"

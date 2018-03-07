@@ -9,20 +9,27 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production node ./index.js",
-    "dev": "NODE_ENV=development nodemon ./index.js"
+    "dev": "NODE_ENV=development nodemon ./index.js",
+    "testing": "ava --watch",
+    "test": "ava"
   },
   "engines": {
     "node": "^9"
   },
+  "ava": {
+    "require": [
+      "@babel/register",
+      "@babel/polyfill"
+    ]
+  },
   "dependencies": {
+    "@babel/preset-env": "^7.0.0-beta.40",
     "@koa/cors": "^2.2.1",
     "apollo-server-koa": "^1.3.2",
     "axios": "^0.18.0",
     "babel-plugin-inline-import-graphql-ast": "^2.2.0-beta.1",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
-    "babel-register": "^6.26.0",
     "dotenv": "^5.0.1",
     "graphql": "^0.13.1",
     "graphql-custom-types": "^1.3.0",
@@ -35,6 +42,10 @@
     "openssl-self-signed-certificate": "^1.1.6"
   },
   "devDependencies": {
+    "@babel/polyfill": "^7.0.0-beta.40",
+    "@babel/preset-stage-0": "^7.0.0-beta.40",
+    "@babel/register": "^7.0.0-beta.40",
+    "ava": "^1.0.0-beta.3",
     "nodemon": "^1.17.1"
   }
 }

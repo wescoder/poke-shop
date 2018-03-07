@@ -1,7 +1,7 @@
 import test from 'ava'
 
 import db from '../../'
-import models, { Pokemon } from '../'
+import { Pokemon } from '../'
 
 test.before('Connect DB', async t => {
   await db.connect()

@@ -9,8 +9,8 @@ import cert from 'openssl-self-signed-certificate'
 import { graphqlKoa, graphiqlKoa } from 'apollo-server-koa'
 
 import db from '../db'
-import { IS_PROD, APP_PORT, APP_URL } from '../env'
 import schema from '../schema'
+import { IS_PROD, APP_PORT, APP_URL } from '../env'
 
 const app = new Koa()
 
@@ -28,24 +28,18 @@ app.use(mount('/graphql', graphqlKoa({
 })))
 app.use(mount('/graphiql', graphiqlKoa({ endpointURL: '/graphql' })))
 
-let server
-
-if (!IS_PROD) {
-  server = https.createServer({
-      key: cert.key,
-      cert: cert.cert,
-      passphrase: cert.passphrase
-    }, app.callback())
-} else {
-  server = http.createServer(app.callback())
-}
-
 db.connect()
-  .then(() =>
+  .then(() => {
+    let server
+    if (IS_PROD) {
+      server = http.createServer(app.callback())
+    } else {
+      server = https.createServer(cert, app.callback())
+    }
     server.listen(APP_PORT, () =>
       console.log(`App running on port ${APP_PORT} ${APP_URL}/graphiql`)
     )
-  )
+  })
   .catch(err => console.error('DB connection Failed!', err))
 
 export default app
